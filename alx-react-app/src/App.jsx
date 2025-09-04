@@ -9,8 +9,9 @@ function App() {
   return (
     <>
       <div>
-        <WelcomeMessage/>
+      
         <Header/>
+          <WelcomeMessage/>
         <MainContent/>
         <UserProfile
         name="Alice"

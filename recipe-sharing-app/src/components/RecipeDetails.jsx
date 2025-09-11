@@ -22,12 +22,32 @@ const RecipeDetails = () => {
   return (
     <div>
       <Link to="/">← Back to Recipes</Link>
-      <h1>{recipe.title}</h1>
-      <p>{recipe.description}</p>
       
-      <div style={{ marginTop: '20px' }}>
-        <EditRecipeForm recipe={recipe} />
-        <DeleteRecipeButton recipeId={recipe.id} />
+      <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '5px' }}>
+        <h1>{recipe.title}</h1>
+        <p>{recipe.description}</p>
+        
+        {recipe.ingredients && recipe.ingredients.length > 0 && (
+          <div style={{ marginTop: '20px' }}>
+            <h3>Ingredients</h3>
+            <ul>
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {recipe.prepTime && (
+          <div style={{ marginTop: '15px' }}>
+            <strong>Preparation Time:</strong> {recipe.prepTime} minutes
+          </div>
+        )}
+        
+        <div style={{ marginTop: '30px' }}>
+          <EditRecipeForm recipe={recipe} />
+          <DeleteRecipeButton recipeId={recipe.id} />
+        </div>
       </div>
     </div>
   )

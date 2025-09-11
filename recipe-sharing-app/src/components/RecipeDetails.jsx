@@ -9,6 +9,9 @@ const RecipeDetails = () => {
   const recipe = useRecipeStore(state =>
     state.recipes.find(recipe => recipe.id === recipeId)
   )
+  const addFavorite = useRecipeStore(state => state.addFavorite)
+  const removeFavorite = useRecipeStore(state => state.removeFavorite)
+  const isFavorite = useRecipeStore(state => state.isFavorite)
 
   if (!recipe) {
     return (
@@ -19,11 +22,36 @@ const RecipeDetails = () => {
     )
   }
 
+  const handleFavoriteToggle = () => {
+    if (isFavorite(recipeId)) {
+      removeFavorite(recipeId)
+    } else {
+      addFavorite(recipeId)
+    }
+  }
+
   return (
     <div>
       <Link to="/">← Back to Recipes</Link>
       
-      <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '5px' }}>
+      <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #ddd', borderRadius: '5px', position: 'relative' }}>
+        <button
+          onClick={handleFavoriteToggle}
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            background: 'none',
+            border: 'none',
+            fontSize: '32px',
+            cursor: 'pointer',
+            color: isFavorite(recipeId) ? '#ff4757' : '#ccc'
+          }}
+          title={isFavorite(recipeId) ? "Remove from favorites" : "Add to favorites"}
+        >
+          {isFavorite(recipeId) ? '❤️' : '🤍'}
+        </button>
+        
         <h1>{recipe.title}</h1>
         <p>{recipe.description}</p>
         

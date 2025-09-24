@@ -1,62 +1,27 @@
 import axios from 'axios';
 
-const GITHUB_API_URL = import.meta.env.VITE_APP_GITHUB_API_URL || 'https://api.github.com';
+const GITHUB_API_URL = 'https://api.github.com/search/users';
 
-// Existing function for single user search
-export const fetchUserData = async (username) => {
-  try {
-    const response = await axios.get(`${GITHUB_API_URL}/users/${username}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    throw error;
-  }
-};
+export const searchUsers = async (searchData, page = 1) => {
+  const { username, location, minRepos, language } = searchData;
 
-// New function for advanced user search
-export const searchUsers = async (searchData, page = 1, perPage = 30) => {
-  try {
-    const query = buildSearchQuery(searchData);
-    const response = await axios.get(`${GITHUB_API_URL}/search/users`, {
-      params: {
-        q: query,
-        page: page,
-        per_page: perPage,
-        sort: 'repositories',
-        order: 'desc'
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error searching users:', error);
-    throw error;
-  }
-};
+  // Build query string
+  let query = '';
+  if (username) query += `${username} in:login`;
+  if (location) query += ` location:${location}`;
+  if (minRepos) query += ` repos:>${minRepos}`;
+  if (language) query += ` language:${language}`;
 
-// Helper function to build the search query
-const buildSearchQuery = (searchData) => {
-  let queryParts = [];
-
-  if (searchData.username) {
-    queryParts.push(`${searchData.username} in:login`);
+  if (!query) {
+    query = 'a'; // fallback to prevent empty search
   }
 
-  if (searchData.location) {
-    queryParts.push(`location:${searchData.location}`);
-  }
+  const params = {
+    q: query.trim(),
+    page,
+    per_page: 9,
+  };
 
-  if (searchData.minRepos) {
-    queryParts.push(`repos:>${searchData.minRepos}`);
-  }
-
-  if (searchData.language) {
-    queryParts.push(`language:${searchData.language}`);
-  }
-
-  // If no criteria specified, return all users
-  if (queryParts.length === 0) {
-    return 'type:user';
-  }
-
-  return queryParts.join(' ');
+  const response = await axios.get(GITHUB_API_URL, { params });
+  return response.data;
 };

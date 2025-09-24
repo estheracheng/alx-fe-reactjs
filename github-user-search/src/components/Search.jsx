@@ -33,6 +33,7 @@ const Search = () => {
       const data = await searchUsers(searchData, 1);
       setUsers(data.items || []);
       setHasMore(data.total_count > data.items?.length);
+    // eslint-disable-next-line no-unused-vars
     } catch (err) {
       setError('Failed to search users. Please try again.');
     } finally {
@@ -48,6 +49,7 @@ const Search = () => {
       setUsers(prev => [...prev, ...(data.items || [])]);
       setPage(nextPage);
       setHasMore(data.total_count > users.length + data.items?.length);
+    // eslint-disable-next-line no-unused-vars
     } catch (err) {
       setError('Failed to load more users.');
     } finally {
@@ -55,14 +57,6 @@ const Search = () => {
     }
   };
 
-  const buildQueryString = (data) => {
-    let query = '';
-    if (data.username) query += `${data.username} in:login`;
-    if (data.location) query += ` location:${data.location}`;
-    if (data.minRepos) query += ` repos:>${data.minRepos}`;
-    if (data.language) query += ` language:${data.language}`;
-    return query.trim() || 'a'; // Default search if all fields are empty
-  };
 
   return (
     <div className="max-w-4xl mx-auto p-6">

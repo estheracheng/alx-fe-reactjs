@@ -17,9 +17,8 @@ export const fetchUserData = async (username) => {
 export const searchUsers = async (searchData, page = 1, perPage = 30) => {
   try {
     const query = buildSearchQuery(searchData);
-    const response = await axios.get(`${GITHUB_API_URL}/search/users`, {
+    const response = await axios.get(`https://api.github.com/search/users?q=${query}`, {
       params: {
-        q: query,
         page: page,
         per_page: perPage,
         sort: 'repositories',

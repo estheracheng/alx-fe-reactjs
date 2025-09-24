@@ -1,8 +1,12 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-export const content = [
-    "./src/**/*.{js,jsx,ts,tsx}", // Adjust the path to match your source files
-];
-export const theme = {
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
     extend: {},
-};
-export const plugins = [];
+  },
+  plugins: [],
+}

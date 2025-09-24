@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { searchUsers } from '../services/githubService';
+import { searchUsers, fetchUserData } from '../services/githubService';
+
 
 const Search = () => {
   const [searchData, setSearchData] = useState({
@@ -22,23 +23,36 @@ const Search = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setUsers([]);
-    setPage(1);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+  setUsers([]);
+  setPage(1);
 
-    try {
+  try {
+    const { username, location, minRepos, language } = searchData;
+
+    const isBasicSearch = username && !location && !minRepos && !language;
+
+    if (isBasicSearch) {
+      // Use fetchUserData for basic search
+      const user = await fetchUserData(username);
+      setUsers([user]); // Wrap in array to match structure
+      setHasMore(false);
+    } else {
+      // Use searchUsers for advanced search
       const data = await searchUsers(searchData, 1);
       setUsers(data.items || []);
-      setHasMore(data.total_count > data.items?.length);
-    } catch (err) {
-      setError('Failed to search users. Please try again.');
-    } finally {
-      setLoading(false);
+      setHasMore(data.total_count > (data.items?.length || 0));
     }
-  };
+  } catch (err) {
+    setError('Failed to search users. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const loadMore = async () => {
     setLoading(true);

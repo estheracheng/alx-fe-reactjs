@@ -1,3 +1,4 @@
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+export const plugins = {
+    tailwindcss: {},
+    autoprefixer: {},
+};

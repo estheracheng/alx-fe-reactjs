@@ -1,7 +1,7 @@
 function App() {
   return (
-    <div className="text-3xl font-bold text-blue-500 p-4">
-      Tailwind is working! 🎉
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 text-blue-600 text-4xl font-bold">
+      Tailwind CSS is finally working!
     </div>
   );
 }

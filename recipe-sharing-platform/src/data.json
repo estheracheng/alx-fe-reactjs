@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop",
+    "cookingTime": "30 mins",
+    "difficulty": "Medium"
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop",
+    "cookingTime": "45 mins",
+    "difficulty": "Medium"
+  },
+  {
+    "id": 3,
+    "title": "Vegetable Stir Fry",
+    "summary": "Quick and healthy stir-fried vegetables with a savory sauce over rice.",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop",
+    "cookingTime": "20 mins",
+    "difficulty": "Easy"
+  },
+  {
+    "id": 4,
+    "title": "Chocolate Lava Cake",
+    "summary": "Decadent chocolate cake with a warm, gooey chocolate center.",
+    "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&h=300&fit=crop",
+    "cookingTime": "25 mins",
+    "difficulty": "Hard"
+  },
+  {
+    "id": 5,
+    "title": "Greek Salad",
+    "summary": "Fresh and healthy salad with tomatoes, cucumbers, olives, and feta cheese.",
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop",
+    "cookingTime": "15 mins",
+    "difficulty": "Easy"
+  },
+  {
+    "id": 6,
+    "title": "Beef Tacos",
+    "summary": "Seasoned ground beef in crispy taco shells with fresh toppings.",
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+    "cookingTime": "25 mins",
+    "difficulty": "Easy"
+  }
+]

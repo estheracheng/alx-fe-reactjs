@@ -1,7 +1,9 @@
-export default function App() {
+function App() {
   return (
-    <div className="text-center text-4xl font-bold text-blue-600">
-      Hello, Tailwind is working!
+    <div className="text-3xl font-bold text-blue-500 p-4">
+      Tailwind is working! 🎉
     </div>
   );
 }
+
+export default App;

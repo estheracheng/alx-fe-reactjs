@@ -22,8 +22,6 @@ const RecipeDetail = () => {
       </div>
     );
   }
-
-  // For demo, we add ingredients and steps as mock data here
   const ingredients = [
     '1 cup ingredient A',
     '2 cups ingredient B',

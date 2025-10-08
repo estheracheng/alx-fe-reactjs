@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -20,48 +20,50 @@ import './App.css';
 function App() {
   return (
     <AuthProvider>
-      <div className="App">
-        <Layout>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:postId" element={<BlogPost />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/users/:userId" element={<UserProfile />} />
-            
-            {/* Protected Routes */}
-            <Route 
-              path="/profile" 
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            >
-              {/* Nested Routes */}
-              <Route index element={<ProfileDetails />} />
-              <Route path="details" element={<ProfileDetails />} />
-              <Route path="settings" element={<ProfileSettings />} />
-            </Route>
-            
-            <Route 
-              path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-            
-            {/* Redirect and 404 */}
-            <Route path="/home" element={<Navigate to="/" replace />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Layout>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:postId" element={<BlogPost />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/users/:userId" element={<UserProfile />} />
+
+              {/* Protected Routes */}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              >
+                {/* Nested Routes */}
+                <Route index element={<ProfileDetails />} />
+                <Route path="details" element={<ProfileDetails />} />
+                <Route path="settings" element={<ProfileSettings />} />
+              </Route>
+
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Redirect and 404 */}
+              <Route path="/home" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </div>
+      </BrowserRouter>
     </AuthProvider>
   );
 }

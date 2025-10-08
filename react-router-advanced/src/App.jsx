@@ -28,7 +28,11 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:postId" element={<BlogPost />} />  {/* Dynamic blog post route */}
+              
+              {/* Both dynamic blog post routes */}
+              <Route path="/blog/:postId" element={<BlogPost />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+
               <Route path="/login" element={<Login />} />
               <Route path="/users" element={<Users />} />
               <Route path="/users/:userId" element={<UserProfile />} />

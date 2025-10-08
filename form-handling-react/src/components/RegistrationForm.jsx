@@ -9,13 +9,15 @@ const RegistrationForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const { username, email, password } = formData; // ✅ Destructure to expose individual fields
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -27,37 +29,37 @@ const RegistrationForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
-    if (!formData.username.trim()) {
+
+    if (!username.trim()) {
       newErrors.username = 'Username is required';
     }
-    
-    if (!formData.email.trim()) {
+
+    if (!email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email is invalid';
     }
-    
-    if (!formData.password) {
+
+    if (!password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
+    } else if (password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       // Mock API call
       const response = await fetch('https://jsonplaceholder.typicode.com/users', {
@@ -67,12 +69,12 @@ const RegistrationForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      
+
       if (response.ok) {
         const result = await response.json();
         console.log('Registration successful:', result);
         alert('Registration successful!');
-        
+
         // Reset form
         setFormData({
           username: '',
@@ -100,11 +102,11 @@ const RegistrationForm = () => {
             type="text"
             id="username"
             name="username"
-            value={formData.username}
+            value={username} // ✅ Changed
             onChange={handleChange}
-            style={{ 
-              width: '100%', 
-              padding: '8px', 
+            style={{
+              width: '100%',
+              padding: '8px',
               marginTop: '5px',
               border: errors.username ? '1px solid red' : '1px solid #ccc'
             }}
@@ -120,11 +122,11 @@ const RegistrationForm = () => {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
+            value={email} // ✅ Changed
             onChange={handleChange}
-            style={{ 
-              width: '100%', 
-              padding: '8px', 
+            style={{
+              width: '100%',
+              padding: '8px',
               marginTop: '5px',
               border: errors.email ? '1px solid red' : '1px solid #ccc'
             }}
@@ -140,11 +142,11 @@ const RegistrationForm = () => {
             type="password"
             id="password"
             name="password"
-            value={formData.password}
+            value={password} // ✅ Changed
             onChange={handleChange}
-            style={{ 
-              width: '100%', 
-              padding: '8px', 
+            style={{
+              width: '100%',
+              padding: '8px',
               marginTop: '5px',
               border: errors.password ? '1px solid red' : '1px solid #ccc'
             }}
@@ -154,8 +156,8 @@ const RegistrationForm = () => {
           )}
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={isSubmitting}
           style={{
             width: '100%',

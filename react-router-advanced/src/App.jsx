@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import Profile from './pages/Profile';
+import Profile from './components/Profile';
 import ProfileDetails from './pages/ProfileDetails';
 import ProfileSettings from './pages/ProfileSettings';
 import Login from './pages/Login';

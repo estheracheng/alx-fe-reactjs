@@ -77,6 +77,9 @@ const PostsComponent = () => {
     queryKey: ['posts'],
     queryFn: postsApi.fetchPosts,
     staleTime: 5000, // Consider data stale after 5 seconds
+    cacheTime: 300000, // Cache for 5 minutes
+    refetchOnWindowFocus: true, // Refetch on window focus
+    keepPreviousData: true, // Keep previous data while fetching
   });
 
   // Fetch single post (demonstrates caching)
@@ -87,6 +90,9 @@ const PostsComponent = () => {
     queryKey: ['post', selectedPostId],
     queryFn: () => postsApi.fetchPostById(selectedPostId),
     enabled: !!selectedPostId, // Only run query if selectedPostId is truthy
+    cacheTime: 300000, // Cache for 5 minutes
+    refetchOnWindowFocus: true, // Refetch on window focus
+    keepPreviousData: true, // Keep previous data while fetching
   });
 
   // Create post mutation

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import ProfileDetails from '../pages/ProfileDetails';
+import ProfileSettings from '../pages/ProfileSettings';
 import './Pages.css';
 
 const Profile = () => {
@@ -47,7 +49,11 @@ const Profile = () => {
         </aside>
         
         <main className="profile-content">
-          <Outlet />
+          <Routes>
+            <Route index element={<ProfileDetails />} />
+            <Route path="details" element={<ProfileDetails />} />
+            <Route path="settings" element={<ProfileSettings />} />
+          </Routes>
         </main>
       </div>
     </div>

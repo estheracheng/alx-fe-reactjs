@@ -2,3 +2,6 @@
   "test": "jest"
 }
 
+"jest": {
+  "testEnvironment": "jsdom"
+}

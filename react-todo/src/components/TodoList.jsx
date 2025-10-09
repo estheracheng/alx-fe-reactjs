@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const initialTodos = [
   { id: 1, text: 'Learn React', completed: false },
-  { id: 2, text: 'Build a project', completed: true }
+  { id: 2, text: 'Build a project', completed: true },
 ];
 
 export default function TodoList() {
@@ -17,20 +17,18 @@ export default function TodoList() {
       text: input.trim(),
       completed: false,
     };
-    setTodos(prev => [...prev, newTodo]);
+    setTodos([...todos, newTodo]);
     setInput('');
   };
 
   const toggleTodo = (id) => {
-    setTodos(prev =>
-      prev.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   };
 
   const deleteTodo = (id) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id));
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
   return (
@@ -47,15 +45,12 @@ export default function TodoList() {
         <button type="submit" data-testid="add-button">Add</button>
       </form>
       <ul data-testid="todo-list">
-        {todos.map((todo) => (
+        {todos.map(todo => (
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
-            style={{
-              cursor: 'pointer',
-              textDecoration: todo.completed ? 'line-through' : 'none'
-            }}
             data-testid={`todo-${todo.id}`}
+            style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
           >
             {todo.text}
             <button
@@ -64,7 +59,6 @@ export default function TodoList() {
                 deleteTodo(todo.id);
               }}
               data-testid={`delete-${todo.id}`}
-              style={{ marginLeft: '10px' }}
             >
               Delete
             </button>

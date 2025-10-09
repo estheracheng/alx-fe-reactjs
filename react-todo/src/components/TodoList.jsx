@@ -14,21 +14,23 @@ export default function TodoList() {
     if (!input.trim()) return;
     const newTodo = {
       id: Date.now(),
-      text: input,
+      text: input.trim(),
       completed: false,
     };
-    setTodos([...todos, newTodo]);
+    setTodos(prev => [...prev, newTodo]);
     setInput('');
   };
 
   const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(prev => prev.filter(todo => todo.id !== id));
   };
 
   return (
@@ -36,28 +38,33 @@ export default function TodoList() {
       <h1>Todo List</h1>
       <form onSubmit={addTodo}>
         <input
+          data-testid="todo-input"
+          type="text"
           placeholder="Add a todo"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          data-testid="todo-input"
         />
-        <button type="submit">Add</button>
+        <button type="submit" data-testid="add-button">Add</button>
       </form>
-
-      <ul>
-        {todos.map(todo => (
+      <ul data-testid="todo-list">
+        {todos.map((todo) => (
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
-            style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            style={{
+              cursor: 'pointer',
+              textDecoration: todo.completed ? 'line-through' : 'none'
+            }}
             data-testid={`todo-${todo.id}`}
           >
             {todo.text}
-            <button onClick={(e) => {
-              e.stopPropagation();
-              deleteTodo(todo.id);
-            }}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
               data-testid={`delete-${todo.id}`}
+              style={{ marginLeft: '10px' }}
             >
               Delete
             </button>
